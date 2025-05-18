@@ -22,3 +22,5 @@ const clonedeep = (obj) => {
 
 const obj2 = clonedeep(user);
 console.log(obj2);
+
+console.log(typeof 123.45);
