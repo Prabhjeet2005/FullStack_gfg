@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const FunctionalComponent = (props) => {
   const [name, setName] = useState(props.name)
@@ -16,6 +17,7 @@ console.log("all useEffect (componentDidUpdate)");
     <>
     <h1>hi {name} {id}</h1>
     <button onClick={()=>setId(id+1)}>click me</button>
+    <Link to="fromLink" >fromLink</Link>
     </>
   )
 }
