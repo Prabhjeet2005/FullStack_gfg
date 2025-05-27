@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import TestComponent from "./Components/TestComponent";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Flex from "./flexbox/Flex.jsx";
+import "./flexbox/index.css"
+import MyNavbar from "./Components/MyNavbar.jsx";
 
 function App() {
 	const [name, setName] = useState("Prabhjeet");
@@ -12,13 +16,20 @@ function App() {
 		name: "Nikhil",
 		userId: 101,
 	};
+
+	const navigate = useNavigate()
 	return (
 		<>
+		<MyNavbar />
 			{/* {displayComponent && <ClassComponent name={name} user={user} />} */}
 			<Link to="route1" element={<TestComponent />}>
 				Test Route "route1"
-			</Link><br />
-			<Link to="route2/p123?search=Mobile&lang=EN" >Query Params UseCase</Link>
+			</Link>
+			<br />
+			<Link to="route2/p123?search=Mobile&lang=EN">Query Params UseCase</Link>
+			<br />
+			<Link to="flexbox-hw">FlexBox Pattern Hw</Link>
+			<button onClick={() => navigate("flexbox-hw")}>Flexbox HW</button>
 			<Outlet />
 		</>
 	);
