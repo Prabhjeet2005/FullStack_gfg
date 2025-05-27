@@ -2,7 +2,8 @@ import React from "react";
 import TestComponent from "../Components/TestComponent";
 import DeeperComponent from "../Components/DeeperComponent";
 import QueryParams from "../Components/QueryParams";
-import Flex from "../flexbox/flex";
+import Flex from "../flexbox/Flex.jsx";
+
 
 export const routes = [
 	{
@@ -14,5 +15,5 @@ export const routes = [
 		path: "route2/:productId",
 		element: <QueryParams />,
 	},
-	{ path: "flexbox-testing", element: <Flex /> },
+	{ path: "flexbox-hw", element: <Flex /> },
 ];
