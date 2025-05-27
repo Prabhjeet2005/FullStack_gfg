@@ -1,0 +1,27 @@
+.flex-container{
+  background-color: aqua;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column
+  
+}
+.flex-items{
+  flex-shrink:0;
+  width:200px;
+  height:50px;
+  border:1px solid black;
+  display :flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.flex-items:nth-child(3n+1){
+  align-self:flex-start;
+}
+.flex-items:nth-child(3n+2){
+  align-self:center;
+}
+.flex-items:nth-child(3n){
+  align-self:flex-end;
+}
