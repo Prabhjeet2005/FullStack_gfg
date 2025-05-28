@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Flex from "./flexbox/Flex.jsx";
 import "./flexbox/index.css"
 import MyNavbar from "./Components/MyNavbar.jsx";
-
+import MyNavbar2 from "./Components/MyNavbar2.jsx";
 function App() {
 	const [name, setName] = useState("Prabhjeet");
 	const [displayComponent, setdisplayComponent] = useState(true);
@@ -20,7 +20,8 @@ function App() {
 	const navigate = useNavigate()
 	return (
 		<>
-		<MyNavbar />
+		<MyNavbar2 />
+		{/* <MyNavbar /> */}
 			{/* {displayComponent && <ClassComponent name={name} user={user} />} */}
 			<Link to="route1" element={<TestComponent />}>
 				Test Route "route1"
