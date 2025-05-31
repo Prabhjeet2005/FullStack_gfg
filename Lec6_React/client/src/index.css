@@ -21,8 +21,8 @@
 .navbar-collapse {
 	color: red;
 }
-.show-menu{
-  display:none;
+.show-menu {
+	display: none;
 }
 @media (max-width: 576px) {
 	.navbar-right-container {
@@ -38,11 +38,77 @@
 	.show {
 		display: flex;
 	}
-  .show-menu{
-    display:flex;
-  }
-  .hide-button{
-    display:none;
-  }
-  
+	.show-menu {
+		display: flex;
+	}
+	.hide-button {
+		display: none;
+	}
+}
+
+
+/* Again Navbar 2 */
+.navbar-2-container {
+	display: flex;
+	background-color: black;
+	color: white;
+	justify-content: space-between;
+	padding: 20px;
+}
+.navbar-2-otherItems {
+	margin-left: 5px;
+	color: white;
+	text-decoration: none;
+}
+
+.navbar-2-menu {
+	display: none;
+}
+
+#collapse-button {
+	color: red;
+}
+#menu-button {
+	color: yellow;
+}
+
+
+@media (max-width: 600px) {
+	.navbar-2-otherItems-container {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		background-color: darkslategray;
+		border-radius: 10px;
+		padding: 5px;
+	}
+	.navbar-items-hide {
+		display: none;
+	}
+  .menu-show {
+	display: flex;
+}
+}
+
+.login-center{
+	display:flex;
+	justify-content: center;
+}
+.login-invalid{
+	color:red;
+}
+.signup-center{
+	display:flex;
+	justify-content: center;
+}
+.signup-invalid{
+	color:red;
+}
+
+.signup-login-box{
+	border:2px solid black;
+	border-radius:10px;
+	box-shadow: 10px 10px 15px 5px pink;
 }
