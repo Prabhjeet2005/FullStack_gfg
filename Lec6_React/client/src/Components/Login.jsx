@@ -19,7 +19,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	// Use regex101 Website to test Pattern Matching
+	// Use regex101 Website to test Pattern Matchin g
 	const namePattern = /[A-Z][a-z]+/;
 	const emailPattern = /^([a-z]+[0-9]+)@([a-z]+[.][a-z]+)/;
 	const upperCaseCheck = /[A-Z]+/.test(password);
