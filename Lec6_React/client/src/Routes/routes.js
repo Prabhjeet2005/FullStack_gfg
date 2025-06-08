@@ -5,6 +5,7 @@ import QueryParams from "../Components/QueryParams";
 import Flex from "../flexbox/Flex.jsx";
 import Login from "../Components/Login.jsx";
 import Signup from "../Components/Signup.jsx";
+import Products from "../Products/index.jsx";
 
 export const routes = [
 	{
@@ -19,4 +20,5 @@ export const routes = [
 	{ path: "flexbox-hw", element: <Flex /> },
 	{ path: "login", element: <Login /> },
 	{ path: "signup", element: <Signup /> },
+	{path:"products",element: <Products />}
 ];
