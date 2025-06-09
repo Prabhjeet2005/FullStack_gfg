@@ -4,6 +4,7 @@
 //   if(!user){
 //     res.status(400).send({ success: false, message: "username not found" });
 
+const UserModel = require("../models/userModel");
 const userModel = require("../models/userModel");
 
 //   }
@@ -20,7 +21,7 @@ const userModel = require("../models/userModel");
 //   }
 // }
 
-const loginController = (req, res) => {
+const loginController = async(req, res) => {
 	const { username, password } = req.body;
 	if (
 		userModel.users.find((u) => u.username === username) &&
@@ -37,14 +38,16 @@ const loginController = (req, res) => {
 	}
 };
 
-const signupController = (req, res) => {
-	const payload = req.body;
-	console.log(payload);
+const signupController =async (req, res) => {
+	const userData = req.body;
+	const {username} = userData;
+	const doesUserExist = await UserModel.findUser(userData.username)
+	console.log(userData);
 
-	if (userModel.users.find(({ username }) => payload.username === username)) {
+	if (userModel.users.find(({ username }) => userData.username === username)) {
 		res.status(403).send({ succes: false, message: "User Already Exists" });
 	} else {
-		userModel.users.push(payload);
+		userModel.users.push(userData);
 		res
 			.status(201)
 			.send({ success: true, message: "User Signned Up Successfully" });
