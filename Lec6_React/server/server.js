@@ -2,7 +2,7 @@ const express = require("express");
 const router = require("./routes/router");
 const cartRouter = require("./routes/cartRouter");
 const userRouter = require("./routes/userRouter");
-
+require("./dbConnection.js")
 const app = express();
 
 // app.use() -> configure Middleware
