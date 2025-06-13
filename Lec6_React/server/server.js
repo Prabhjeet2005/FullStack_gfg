@@ -1,4 +1,5 @@
 const express = require("express");
+require("./dbConnection.js")	// Connection to DataBase
 const router = require("./routes/router");
 const cartRouter = require("./routes/cartRouter");
 const userRouter = require("./routes/userRouter");
