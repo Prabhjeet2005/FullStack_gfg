@@ -24,15 +24,14 @@ const userSchema = new Schema({
 	},
 });
 
-const UserModel = model("users", userSchema);
 
 // Static Method
 userSchema.statics.createUser = async (userdata) => {
 	const data = await UserModel.create(userdata);
 	return data;
 };
-userSchema.statics.finduser = async (username) => {
-	const user = (await UserModel.findOne({ username }, { _id: 0 }))?.toObject(); // Because It Returns Document
+userSchema.statics.findUser = async (username) => {
+	const user = (await UserModel.findOne({ username }, { _id: 0,__v:0 }))?.toObject(); // Because It Returns Document
 	if (!user) {
 		const err = new Error(`Username Doesn't Exist`);
 		err.status = 404;
@@ -40,5 +39,18 @@ userSchema.statics.finduser = async (username) => {
 	}
 	return user;
 };
+
+userSchema.statics.deleteUser = async(username)=>{
+	const user = (await UserModel.findOne({username}))?.toObject();
+	await UserModel.deleteOne(user);
+}
+
+userSchema.statics.updateName = async(userdata)=>{
+	const {username,name} = userdata;
+	const user = await UserModel.findOneAndUpdate({username},{$set:{name:name}});
+	return user
+}
+
+const UserModel = model("users", userSchema);
 
 module.exports = UserModel;
