@@ -1,57 +1,71 @@
-// const loginController = (req,res)=>{
-//   const {username,password} = req.body;
-//   const user = userModel.users.find(({user})=>user.username === username)
-//   if(!user){
-//     res.status(400).send({ success: false, message: "username not found" });
-
 const UserModel = require("../models/userModel");
-const userModel = require("../models/userModel");
 
-//   }
-// }
+const loginController = async (req, res) => {
+	try {
+		const {username,password} = req.body;
+		const user = await UserModel.findUser(username);
+		const {password:userPassword,...userData} = user;	// Hides Password as Login Response
 
-// const signupController = (req,res)=>{
-//   const userData = req.body;
-//   // Check if username already exist
-//   if(userModel.users.find(({username})=>username === userData.username)){
-//     res.status(400).send({success:false,message:"username already exist"})
-//   }else{
-//     userModel.users.push(userData)
-//     res.status(201).send({success:true,message:`Signned Up Successfully`})
-//   }
-// }
-
-const loginController = async(req, res) => {
-	const { username, password } = req.body;
-	if (
-		userModel.users.find((u) => u.username === username) &&
-		userModel.users.find((u) => u.password === password)
-	) {
-		res
-			.status(200)
-			.send({ success: true, message: "User Logged In Successfully" });
-	} else {
-		res.status(400).send({
-			success: true,
-			message: "Something Went Wrong While Logging In",
-		});
+		if(password !== userPassword){
+			res.status(401).send({success:false,message:"Incorrect Password"});
+		}
+		res.status(200).send({success:true,data:userData,message:"User Logged In"})
+	} catch (error) {
+		res.status(400).send({success:false,message:error.message})
 	}
+	
 };
 
-const signupController =async (req, res) => {
-	const userData = req.body;
-	const {username} = userData;
-	const doesUserExist = await UserModel.findUser(userData.username)
-	console.log(userData);
-
-	if (userModel.users.find(({ username }) => userData.username === username)) {
-		res.status(403).send({ succes: false, message: "User Already Exists" });
-	} else {
-		userModel.users.push(userData);
+const signupController = async (req, res) => {
+	try {
+		const userData = req.body;
+		const user = await UserModel.createUser(userData);
+		if(!user){
+			res.status(400).send({success:false,message:"Error While Registering"})
+		}
 		res
 			.status(201)
-			.send({ success: true, message: "User Signned Up Successfully" });
+			.send({ success: true, data:user,message: "User Registered Successfully" });
+	} catch (error) {
+		res.status(400).send({ success: false, message: error.message });
 	}
 };
 
-module.exports = { loginController, signupController };
+const deleteController = async (req,res)=>{
+	try {
+		const {username,password} = req.body;
+		const user = await UserModel.findUser(username);
+		if(!user){
+			res.status(400).send({success:false,message:"Username Not Found"})
+		}
+		const {password:userPassword,...userData} = user;
+		if(password !== userPassword){
+			res.status(400).send({success:false,message:"Password Incorrect"})
+		}
+
+		await UserModel.deleteUser(username) 
+		res.status(200).send({success:true,message:"User Deleted Successfully"})
+	} catch (error) {
+		res.status(400).send({success:false,message:error.message})
+	}
+}
+
+const updateName = async(req,res)=>{
+	try {
+		const userData = req.body;
+		const {username,name} = userData;
+		if(!username || !name){
+			res.status(400).send({success:false,message:"Name or Username Not Entered"})
+		}
+		const user = await UserModel.updateName(userData);
+		if(!user){
+			res.status(400).send({success:false,message:"User Not Found"})
+		}
+		const {password:userPassword,...userUpdateData} = user
+		res.status(200).send({success:true,data:userUpdateData,message:"Name Updated Successfully"})
+	} catch (error) {
+		res.status(400).send({success:false,message:error.message})
+	}
+}
+
+module.exports = { loginController, signupController, deleteController,updateName };
