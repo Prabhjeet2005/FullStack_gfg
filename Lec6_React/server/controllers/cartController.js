@@ -1,16 +1,15 @@
-const CartModel = require("../models/cartModel");
+const UserModel = require("../models/userModel");
+const { responseCreator } = require("../utils/responseHandler");
 
-const addtocartController = async (req,res)=>{
+const addtocartController = async (req,res,next)=>{
   try {
-    const userData = req.body;
-    const {username,product} = userData;
-    if(!username){
-      res.status(400).send({success:false,message:"Enter Username"})
-    }
-    const updatedCart = await CartModel.addtocart(userData,product);
-    res.status(200).send({success:true,data:updatedCart,message:"Added To Cart Successfully"})
+    const {username} = res.locals.user; // Geting From authController
+
+    const data = await UserModel.addToCart(username,product)
+
+    res.send(responseCreator(`${product.title} is added to cart `,data))
   } catch (error) {
-    res.status(400).send({success:false,message:error.message});
+    next(error);
   }
 }
 
